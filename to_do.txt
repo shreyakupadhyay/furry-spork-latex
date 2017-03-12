@@ -1,0 +1,13 @@
+1. json_parsing.
+2. optimizing DFA.
+3. Latex code.
+4. graph positioning.
+
+Thinking Part 3:
+1. Libraries will be in a separate file so that each time when we are generating code we do not have to output those
+lines also. Print the libraries once for once complete sharelatex document.
+2. 
+
+
+to_do Part 3:
+1.
