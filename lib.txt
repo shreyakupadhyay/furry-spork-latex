@@ -1,0 +1,6 @@
+\documentclass{article}
+
+\usepackage{pgf}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning}
