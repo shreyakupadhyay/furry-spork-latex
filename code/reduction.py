@@ -7,7 +7,7 @@ Description: Reduction of nodes to minimized number of nodes by updating the dic
 the json file and giving new output as json.
 
 '''
-# [[A],[B],[C,E],[D,F],[G]]
+
 
 import json
 
@@ -15,63 +15,60 @@ graphFile = open('../graph2.json','r')
 # loading the file in json format and reading it
 readFile = graphFile.read()
 
-# file_string = json.loads(readFile)
-string = '''{
-	"stable":[{
-		"D":[{"val":1,"to":"E"},{"val":0,"to":"D"}],
-		"F":[{"val":1,"to":"E"},{"val":0,"to":"D"}],
-		"G":[{"val":1,"to":"G"},{"val":0,"to":"F"}]
-		}],
-	"unstable":[{
-		"A":[{"val":0,"to":"B"},{"val":1,"to":"C"}],
-		"B":[{"val":1,"to":"E"},{"val":0,"to":"D"}],
-		"C":[{"val":0,"to":"F"},{"val":1,"to":"G"}],
-		"E":[{"val":1,"to":"G"},{"val":0,"to":"F"}]
-		}]
-}'''
-file_string = json.loads(string)
+file_string = json.loads(readFile)
 newNodes = ["A","B",["C","E"],["D","F"],"G"]
-# print newNodes[0]
 
 
+'''
+combining all nodes in a block and calling update_json function
+'''
 
-def fucn(stablility):
+def combine(stablility):
 	for node in newNodes:
-		if(len(node) == 1):
+		if(len(node) == 1):   # if an array index contains only one element not the list
 			continue
 		else:	
-			updated_node = ','.join(map(str, node))
-			equinode = node[0]
-			print updated_node,equinode
-			update_json(updated_node,equinode,"unstable") #update node to updated_node
+			updated_node = ','.join(map(str, node)) # joining all nodes in a block
+			equinode = node[0]    # calling function update_json with first element of an equivalent block
+			# print updated_node,equinode
+			update_nodeName(updated_node,equinode,stablility) #update node to updated_node
 
+'''
+updating the input json with removing the initial nodes with the equivalent blocks
+'''
 
-def update_json(updated_node,node,stablility):
+def update_nodeName(updated_node,node,stablility):
 	stable_nodes = file_string[stablility][0].keys()
 	count = 0
 	for key in stable_nodes:
-		if (key in updated_node and count==1):
+		if (key in updated_node and count==1): # updating the node with updated_node
 			del file_string[stablility][0][key]
-			print key,"if"
-		elif (key in updated_node and count==0): 
+			
+		elif (key in updated_node and count==0):  # remove the node if its equivalent node was updated 
 			file_string[stablility][0][updated_node] = file_string[stablility][0][node]
 			del file_string[stablility][0][node]
 			count = 1
-			print key,"elif"
 			# print file_string["stable"]
-	print file_string[stablility]
 
-fucn("stable")
-			
-# afterRed(newNodes)
+'''
+updating the nodes outputs to the updated nodes
+'''
 
-# nodes = stable_nodes + unstable_nodes
+def update_toNodes(stablility,stablility_keys):
+	for key in stablility_keys:
+		for idx in range(0,2): # as we are working for a DFA for hard coded outputs will be 2
+			to_val = file_string[stablility][0][key][idx]["to"]
+			for sub in nodeNames:
+				if(to_val in sub):
+					file_string[stablility][0][key][idx]["to"] = sub
 
-# for i in range(0,len(stable_nodes)):
-# 	if(file_string["stable"][0][i] == "D" or file_string["stable"][0][i] == "F"):
-# 		print "in if"
-# 		file_string["stable"][0]["D,F"] = file_string["stable"][0].pop("D")
-# 		del file_string["stable"][0].keys()[i]
 
-
-# print file_string["stable"][0].keys()
+if __name__ == "__main__":
+	combine("stable")
+	combine("unstable")
+	stable_keys = file_string["stable"][0].keys()
+	unstable_keys = file_string["unstable"][0].keys()
+	nodeNames = stable_keys + unstable_keys
+	update_toNodes("stable",stable_keys)
+	update_toNodes("unstable",unstable_keys)
+	print file_string
