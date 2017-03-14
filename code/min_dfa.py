@@ -82,7 +82,8 @@ def transition(stability1,stability2):
 
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
+def main():
 	unstable_block = transition("unstable","stable")
 	stable_block = transition("stable","unstable")
 	all_nodes = json_obj["stable"][0].keys() + json_obj["unstable"][0].keys() # all nodes
@@ -90,6 +91,6 @@ if __name__ == "__main__":
 	all_nodes = [x for x in all_nodes if x not in listsearch(stable_block)] # removing stable blocks(blocks generated from stable nodes list) from all_nodes
 	all_nodes = [x for x in all_nodes if x not in listsearch(unstable_block)] # removing unstable blocks(blocks generated from unstable nodes list) from all_nodes
 
-	print all_nodes + unstable_block + stable_block # generating list required of reduction [u'G', u'B', [u'A'], [u'C', u'E'], [u'D', u'F']]
+	return all_nodes + unstable_block + stable_block # generating list required of reduction [u'G', u'B', [u'A'], [u'C', u'E'], [u'D', u'F']]
 
 

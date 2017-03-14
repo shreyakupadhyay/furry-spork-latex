@@ -16,14 +16,14 @@ graphFile = open('../graph2.json','r')
 readFile = graphFile.read()
 
 file_string = json.loads(readFile)
-newNodes = ["A","B",["C","E"],["D","F"],"G"]
+# newNodes = ["A","B",["C","E"],["D","F"],"G"]
 
 
 '''
 combining all nodes in a block and calling update_json function
 '''
 
-def combine(stablility):
+def combine(stablility,newNodes):
 	for node in newNodes:
 		if(len(node) == 1):   # if an array index contains only one element not the list
 			continue
@@ -54,7 +54,7 @@ def update_nodeName(updated_node,node,stablility):
 updating the nodes outputs to the updated nodes
 '''
 
-def update_toNodes(stablility,stablility_keys):
+def update_toNodes(stablility,stablility_keys,nodeNames):
 	for key in stablility_keys:
 		for idx in range(0,2): # as we are working for a DFA for hard coded outputs will be 2
 			to_val = file_string[stablility][0][key][idx]["to"]
@@ -63,12 +63,13 @@ def update_toNodes(stablility,stablility_keys):
 					file_string[stablility][0][key][idx]["to"] = sub
 
 
-if __name__ == "__main__":
-	combine("stable")
-	combine("unstable")
-	stable_keys = file_string["stable"][0].keys()
-	unstable_keys = file_string["unstable"][0].keys()
-	nodeNames = stable_keys + unstable_keys
-	update_toNodes("stable",stable_keys)
-	update_toNodes("unstable",unstable_keys)
-	print file_string
+#if __name__ == "__main__":
+def main(newNodes):
+		combine("stable",newNodes)
+		combine("unstable",newNodes)
+		stable_keys = file_string["stable"][0].keys()
+		unstable_keys = file_string["unstable"][0].keys()
+		nodeNames = stable_keys + unstable_keys
+		update_toNodes("stable",stable_keys,nodeNames)
+		update_toNodes("unstable",unstable_keys,nodeNames)
+		return file_string
