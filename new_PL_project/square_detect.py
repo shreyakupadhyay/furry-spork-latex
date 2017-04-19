@@ -14,6 +14,7 @@
 0 0 0 0 0 0
 0 0 0 0 0 0
 
+
 Left right up down right-up left-up right-down left-down 
 '''
 
@@ -21,11 +22,22 @@ rows = 6
 cols = 6
 extra = 0
 sides = 0
-matrix = [[0, 0, 0, 0, 0, 0], [0, 1, 1, 1, 1, 0], [0, 1, 0, 0, 1, 0], [0, 1, 0, 0, 1, 0], [0, 1, 1, 1, 1, 0],
+#matrix = [[0, 0, 0, 0, 0, 0], [0, 1, 1, 1, 1, 0], [0, 1, 0, 0, 1, 0], [0, 1, 0, 0, 1, 0], [0, 1, 1, 1, 1, 0],
+#         [0, 0, 0, 0, 0, 0]]
+matrix = [[0, 0, 0, 0, 0, 0], [0, 1, 1, 1, 0, 0], [0, 1, 0, 1, 0, 0], [0, 1, 1, 1, 0, 0], [0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0]]
 #print matrix
 #matrix = [[0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 1, 0, 1, 0, 0], [1, 1, 1, 1, 1, 0], [0, 0, 0, 0, 0, 0],
 #          [0, 0, 0, 0, 0, 0]]
+'''
+rows = 7
+cols = 7
+extra = 0
+sides = 0
+matrix = [[1, 1, 1, 1, 1, 0, 0],[1, 0, 0, 0, 1, 0, 0],[1, 0, 1, 1, 1, 1, 1],[1, 0, 1, 0, 1, 0, 1],[1, 1, 1, 1, 1, 0, 1],
+[0, 0, 1, 0, 0, 0, 1],[0, 0, 1, 1, 1, 1, 1]]
+'''
+coordinates = []
 
 def motion(next_row,next_col,prev_node,row,col,direction,count,prev_dir):
     global sides
@@ -36,12 +48,32 @@ def motion(next_row,next_col,prev_node,row,col,direction,count,prev_dir):
     next_dir = direction
 #    print prev_dir + "   " + direction
     next_node = (next_row, next_col)
+    global coordinates
     if next_node != prev_node:
         print next_node, prev_node
         if (prev_dir != direction):
             sides = sides + 1
+            coordinates.append((row,col))            
             print "change in direction"
         decision(next_row, next_col, next_dir, (row, col), start_node,count)
+
+
+
+def latex_code(coordinates):
+    append_code = "\draw "
+    for coordinate in coordinates:
+        append_code = append_code + str(coordinate)+" -- "
+    append_code =append_code + "cycle\n"
+
+    code = """\documentclass{article}
+                \usepackage{tikz}
+
+                \\begin{document}
+                    \\begin{tikzpicture}"""+append_code+"""\end{tikzpicture}
+                \end{document}"""
+    return code
+
+                        # \draw (a.center) -- (b.center) -- (c.center) -- cycle;
 
 
 def decision(row, col, prev_dir, prev_node,start_node,count):  # this function decides which direction to choose and move forward.
@@ -99,5 +131,8 @@ if __name__ == "__main__":
                 break
         if (count == 1):
             break
+    print coordinates
     print "Number of Sides = " + str(sides-1)
+    print latex_code(coordinates)
+
 
