@@ -1,0 +1,8 @@
+\documentclass{article}
+\usepackage{tikz}
+
+\begin{document}
+    \begin{tikzpicture}
+\draw[orange, ultra thick] (2,0) -- (2,2) -- (0,2) -- (0,0) -- cycle;        
+    \end{tikzpicture}
+\end{document}
