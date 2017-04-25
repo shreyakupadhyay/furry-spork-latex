@@ -10,6 +10,7 @@ Final working code for detecting squares in 2-D matrix.
 1 1 1 1 1 0 1
 0 0 1 0 0 0 1
 0 0 1 1 1 1 1
+
 output: (2, 6), (6, 6), (3, 0), (4, 4), (0, 0), (2, 0), (6, 2), (0, 4), (2, 2), (4, 2), (1, 0), (2, 4), (4, 0)
 '''
 rows = 7  # number of rows of matrix
@@ -17,7 +18,7 @@ cols = 7  # number of columns of matrix
 extra = 0
 sides = 0
 
-# '''
+'''
 matrix = [[1, 1, 1, 1, 1, 0, 0],
           [1, 0, 0, 0, 1, 0, 0],
           [1, 0, 1, 1, 1, 1, 1],
@@ -25,7 +26,7 @@ matrix = [[1, 1, 1, 1, 1, 0, 0],
           [1, 1, 1, 1, 1, 0, 1],
           [0, 0, 1, 0, 0, 0, 1],
           [0, 0, 1, 1, 1, 1, 1]]
-'''
+
 
 matrix = [[1, 1, 1, 0, 0, 0, 0],
           [1, 0, 1, 0, 0, 0, 0],
@@ -47,11 +48,30 @@ coordinates = [(0,0)]
 pts = []
 lines = []
 
+import sys
 from pandas import *
 '''0
 counting number of ones surrounding a point. And checking whether it have more than 2 ones.
 If it has than it is a corner point.
 '''
+
+matrix = []
+filename = sys.argv[1]
+
+def read_input():
+  raw_mat = []
+  f = open(filename)
+  for line in f.readlines():
+      raw_mat.append(line.split())
+  f.close()
+  for row in raw_mat:
+      matrix.append([i for i in row if i.isdigit()])
+  for i in range(len(matrix)):
+    for j in range(len(matrix[i])):
+         matrix[i][j]=int(matrix[i][j])
+
+
+
 def numOnes(row,col):
   num_ones = 0
   if row + 1 < rows and matrix[row + 1][col] == 1:
@@ -150,6 +170,8 @@ def decision(row, col, prev_dir, prev_node,start_node,count,corner):
         motion(row , col-1 , prev_node, row, col, 'l',count,prev_dir,start_node,corner)
 
 if __name__ == "__main__":
+    read_input()
+    print matrix
     count = 0
     row = 0
     col = 0
@@ -158,15 +180,15 @@ if __name__ == "__main__":
             if (matrix[row][col] == 0):
                 continue
             elif (matrix[row][col] == 1):
-                # print "Shreyaak"
+                #print "Shreyaak"
                 start_node = (row, col)
                 corner = start_node
                 decision(row, col, '', (row, col - 1), start_node,0,corner)
                 break
         if (count == 1):
             break
-
     unique_pts = sorted(set(tups_of_pts),key=tups_of_pts.index)
+    print lines
     for i in set(lines):
       print i
     # print checks
