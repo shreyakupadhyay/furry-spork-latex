@@ -96,19 +96,19 @@ def decision(row, col, prev_dir, prev_node,start_node,count,corner):
     if(extra == 1):
         return extra
 
-    if row + 1 < rows and matrix[row + 1][col] == 1 and checks[row + 1][col]<1:  # [row+1][col]   down
+    if row + 1 < rows and matrix[row + 1][col] == 1 and checks[row + 1][col]<3:  # [row+1][col]   down
         motion(row + 1 , col, prev_node, row, col, 'd',count,prev_dir,start_node,corner)
 
 
-    if row - 1 > 0 and matrix[row - 1][col] == 1 and checks[row - 1][col]<1:  # [row-1][col]  up
+    if row - 1 > 0 and matrix[row - 1][col] == 1 and checks[row - 1][col]<3:  # [row-1][col]  up
         motion(row - 1, col, prev_node, row, col, 'u',count,prev_dir,start_node,corner)
 
 
-    if col + 1 < cols and matrix[row][col + 1] == 1 and checks[row][col+1]<1:  # [row][col+1]  right
+    if col + 1 < cols and matrix[row][col + 1] == 1 and checks[row][col+1]<3:  # [row][col+1]  right
         motion(row, col+1, prev_node, row, col, 'r',count,prev_dir,start_node,corner)
 
 
-    if col - 1 > 0 and matrix[row][col - 1] == 1 and checks[row][col-1]<1:  # [row][col-1]  left
+    if col - 1 > 0 and matrix[row][col - 1] == 1 and checks[row][col-1]<3:  # [row][col-1]  left
         motion(row , col-1 , prev_node, row, col, 'l',count,prev_dir,start_node,corner)
 
 if __name__ == "__main__":
@@ -129,7 +129,9 @@ if __name__ == "__main__":
 
     unique_pts = sorted(set(tups_of_pts),key=tups_of_pts.index)
 
-    print [i for i in set(lines)]
+    # print [i for i in set(lines)]
+    for i in set(lines):
+        print i
 
 
 
