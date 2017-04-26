@@ -4,6 +4,7 @@ Working status: Final working code for detecting squares in 2-D matrix.
 '''
 
 import sys
+# import pandas as pd
 
 coordinates = [(0,0)]
 pts = []
@@ -46,13 +47,13 @@ def numOnes(row,col):
   if row + 1 < rows and matrix[row + 1][col] == 1:
     num_ones = num_ones + 1
 
-  if row - 1 > 0 and matrix[row - 1][col] == 1:
+  if row - 1 >= 0 and matrix[row - 1][col] == 1:
     num_ones = num_ones + 1
 
   if col + 1 < cols and matrix[row][col + 1] == 1:
     num_ones = num_ones + 1
 
-  if col - 1 > 0 and matrix[row][col - 1] == 1:
+  if col - 1 >= 0 and matrix[row][col - 1] == 1:
     num_ones = num_ones + 1
 
   # print num_ones
@@ -68,6 +69,8 @@ def motion(next_row,next_col,prev_node,row,col,direction,count,prev_dir,start_no
     count = count+1
     next_dir = direction  
     next_node = (next_row, next_col)
+    # print pd.DataFrame(checks)
+    # print "====================="
     global coordinates
     if next_node != prev_node:
         checks[row][col] = checks[row][col] + 1
@@ -76,6 +79,7 @@ def motion(next_row,next_col,prev_node,row,col,direction,count,prev_dir,start_no
             coordinates.append((row,col))
             prev_corner = corner
             corner = (row,col)
+            print (prev_corner,corner)
             lines.append(tuple((prev_corner,corner))) 
             pts.append(tuple((row,col)))
         decision(next_row, next_col, next_dir, (row, col), start_node,count,corner)
@@ -94,18 +98,19 @@ def decision(row, col, prev_dir, prev_node,start_node,count,corner):
     if(extra == 1):
         return extra
 
+
     if row + 1 < rows and matrix[row + 1][col] == 1 and checks[row + 1][col]<=(numOnes(row+1,col)-1):  # [row+1][col]   down
         motion(row + 1 , col, prev_node, row, col, 'd',count,prev_dir,start_node,corner)
 
+    if row - 1 >= 0 and matrix[row - 1][col] == 1 and checks[row - 1][col]<=(numOnes(row-1,col)-1):  # [row-1][col]  up
+      motion(row - 1, col, prev_node, row, col, 'u',count,prev_dir,start_node,corner)
 
-    if row - 1 > 0 and matrix[row - 1][col] == 1 and checks[row - 1][col]<=(numOnes(row-1,col)-1):  # [row-1][col]  up
-        motion(row - 1, col, prev_node, row, col, 'u',count,prev_dir,start_node,corner)
 
     if col + 1 < cols and matrix[row][col + 1] == 1 and checks[row][col+1]<=(numOnes(row,col+1)-1):  # [row][col+1]  right
         motion(row, col+1, prev_node, row, col, 'r',count,prev_dir,start_node,corner)
 
 
-    if col - 1 > 0 and matrix[row][col - 1] == 1 and checks[row][col-1]<=(numOnes(row,col-1)-1):  # [row][col-1]  left
+    if col - 1 >= 0 and matrix[row][col - 1] == 1 and checks[row][col-1]<=(numOnes(row,col-1)-1):  # [row][col-1]  left
         motion(row , col-1 , prev_node, row, col, 'l',count,prev_dir,start_node,corner)
 
 '''
@@ -130,7 +135,10 @@ if __name__ == "__main__":
     global rows,cols
     rows = len(matrix)  # number of rows of matrix
     cols = len(matrix[0])  # number of columns of matrix
+    print rows,cols
     init_check()
     iterMatrix()
-    print [line for line in set(lines)]
+    for line in lines:
+      print line
+    # print [line for line in set(lines)]
       
