@@ -2,12 +2,13 @@
 Description: Detecting squares from a 2D matrix.
 Working status: Final working code for detecting squares in 2-D matrix.
 '''
+# and start_node != (row,col))
 
 import sys
 # import pandas as pd
 
-coordinates = [(0,0)]
-pts = []
+coordinates = []
+#pts = []
 lines = []
 
 extra, sides = 0,0
@@ -35,9 +36,19 @@ def readInput():
 ''' 
 initialising the checks matrix
 '''
-def init_check():
+def initCheck():
   global checks
   checks = [[0 for x in range(cols)] for y in range(rows)]
+
+'''
+removing duplicates from list and also preserving the order
+'''
+def removeDuplicates(myList):
+    newlist = []
+    for element in myList:
+       if element not in newlist:
+           newlist.append(element)
+    return newlist
 
 '''
 Getting number of ones surrounding a point in a matrix.
@@ -74,14 +85,15 @@ def motion(next_row,next_col,prev_node,row,col,direction,count,prev_dir,start_no
     global coordinates
     if next_node != prev_node:
         checks[row][col] = checks[row][col] + 1
-        if ((prev_dir != direction and start_node != (row,col)) or numOnes(row,col)>=3):
+        if (prev_dir != direction or numOnes(row,col)>=3):
             sides = sides + 1
             coordinates.append((row,col))
             prev_corner = corner
             corner = (row,col)
-            print (prev_corner,corner)
-            lines.append(tuple((prev_corner,corner))) 
-            pts.append(tuple((row,col)))
+#            print (prev_corner,corner)
+            if(prev_corner != corner):
+              lines.append(tuple((prev_corner,corner))) 
+#            pts.append(tuple((row,col)))
         decision(next_row, next_col, next_dir, (row, col), start_node,count,corner)
 
 '''
@@ -135,10 +147,9 @@ if __name__ == "__main__":
     global rows,cols
     rows = len(matrix)  # number of rows of matrix
     cols = len(matrix[0])  # number of columns of matrix
-    print rows,cols
-    init_check()
+    initCheck()
     iterMatrix()
-    for line in lines:
-      print line
-    # print [line for line in set(lines)]
-      
+#    print [line for line in set(lines)]
+    unique_lines = removeDuplicates(lines)
+    for l in unique_lines:
+      print l
