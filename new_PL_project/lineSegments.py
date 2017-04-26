@@ -1,23 +1,18 @@
 '''
 Description: Detecting squares from a 2D matrix.
-WOrking status: Final working code for detecting squares in 2-D matrix.
+Working status: Final working code for detecting squares in 2-D matrix.
 '''
+
 import sys
 
-checks = [[0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0]]
-
 coordinates = [(0,0)]
-pts,lines = [],[]
+pts = []
+lines = []
 
-rows,cols,extra,sides = 7,7,0,0  # number of rows and columns of matrix
+extra, sides = 0,0
 
 matrix = []
+checks = []
 filename = sys.argv[1] # matrix.txt
 
 
@@ -36,6 +31,12 @@ def readInput():
     for j in range(len(matrix[i])):
          matrix[i][j]=int(matrix[i][j])
 
+''' 
+initialising the checks matrix
+'''
+def init_check():
+  global checks
+  checks = [[0 for x in range(cols)] for y in range(rows)]
 
 '''
 Getting number of ones surrounding a point in a matrix.
@@ -68,7 +69,6 @@ def motion(next_row,next_col,prev_node,row,col,direction,count,prev_dir,start_no
     next_dir = direction  
     next_node = (next_row, next_col)
     global coordinates
-    print checks
     if next_node != prev_node:
         checks[row][col] = checks[row][col] + 1
         if ((prev_dir != direction and start_node != (row,col)) or numOnes(row,col)>=3):
@@ -127,5 +127,10 @@ def iterMatrix():
 
 if __name__ == "__main__":
     readInput()
+    global rows,cols
+    rows = len(matrix)  # number of rows of matrix
+    cols = len(matrix[0])  # number of columns of matrix
+    init_check()
     iterMatrix()
     print [line for line in set(lines)]
+      
