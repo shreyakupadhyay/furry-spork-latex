@@ -1,6 +1,12 @@
+import sys
 import genLatexCode
-import 
+import lineSegments
+from shapely.ops import polygonize
 
 if __name__ == "__main__":
-	coordinates = 
-	genLatexCode.shape(coordinates)
+	lines = lineSegments.main(sys.argv[1])
+
+	for i in (list(polygonize(lines))):
+		print i.envelope
+		
+	genLatexCode.latexCode(lines)

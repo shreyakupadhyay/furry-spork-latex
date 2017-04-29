@@ -1,6 +1,6 @@
 '''
 Description: Detecting squares from a 2D matrix.
-Working status: Final working code for detecting squares in 2-D matrix.
+Working status: Final working code for detecting line segments in 2-D matrix.
 '''
 # and start_node != (row,col))
 
@@ -15,7 +15,7 @@ extra, sides = 0,0
 
 matrix = []
 checks = []
-filename = sys.argv[1] # matrix.txt
+# filename = sys.argv[1] # matrix.txt
 
 
 '''
@@ -142,7 +142,10 @@ def iterMatrix():
       if (count == 1):
           break
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
+def main(Filename):
+    global filename
+    filename = Filename
     readInput()
     global rows,cols
     rows = len(matrix)  # number of rows of matrix
@@ -151,5 +154,6 @@ if __name__ == "__main__":
     iterMatrix()
 #    print [line for line in set(lines)]
     unique_lines = removeDuplicates(lines)
-    for l in unique_lines:
-      print l
+    return [line for line in unique_lines]
+
+# main(sys.argv[1])

@@ -4,10 +4,10 @@ Working status: Currently we are able to work with square shapes.
 '''
 
 '''
-shape(shape_coordinates) function generates the tikz code of square.
+latexCode(shape_coordinates) function generates the tikz code of square.
 '''
 
-def shape(shape_coordinates):
+def latexCode(shape_coordinates):
 	file = open("importLatexCode.txt", "r")
 	searchline = "    \\begin{tikzpicture}\n"
 	contents = file.readlines()
@@ -21,4 +21,4 @@ def shape(shape_coordinates):
 	contents = "".join(contents)
 	file.write(contents)
 	file.close()
-shape("")
+# latexCode("")
