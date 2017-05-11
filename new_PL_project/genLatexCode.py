@@ -14,10 +14,10 @@ def latexCode(shape_coordinates):
 	index = contents.index(searchline)
 	file.close()
 
-	code = "\draw[orange, ultra thick] (2,0) -- (2,2) -- (0,2) -- (0,0) -- cycle;"
+	code = shape_coordinates
 	contents.insert(index+1, code)
 
-	file = open("outputLatexCode.txt", "w")
+	file = open("outputLatexCode.txt", "a")
 	contents = "".join(contents)
 	file.write(contents)
 	file.close()
