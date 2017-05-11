@@ -18,7 +18,7 @@ Using the concepts of computational geometry we have implemented Latex code gene
 - Finding all the coordinates of corner points in the 2D matrix.
 - Using the above detected coordinated generating the Latex code.
 ###### Learn more
-- [util.py](https://github.com/shreyakupadhyay/furry-spork-latex/blob/master/new_PL_project/util.py) Main file <br>python util.py matrix.txt</br>
+- [util.py](https://github.com/shreyakupadhyay/furry-spork-latex/blob/master/new_PL_project/util.py) Main file python util.py matrix.txt
 - [detectSolidShapes.py](https://github.com/shreyakupadhyay/furry-spork-latex/blob/master/new_PL_project/detectSolidSquare.py) Detecting solid shapes in matrix.
 - [lineSegments.py](https://github.com/shreyakupadhyay/furry-spork-latex/blob/master/new_PL_project/lineSegments.py) Finding all the line segments in the 2D matrix.
 - [matrix.txt](https://github.com/shreyakupadhyay/furry-spork-latex/blob/master/new_PL_project/matrix.txt) Give your 2D matrix for detecting shapes and pass it as argument while running util.py.
@@ -33,15 +33,17 @@ Using the techniques of Machine Learning and Image Processing implementing the s
 - Latex code generation.
 
 ###### Learn more
-- [main.py](https://github.com/shreyakupadhyay/furry-spork-latex/blob/master/code/main.py) Main file <br>python main.py</br>
+- [main.py](https://github.com/shreyakupadhyay/furry-spork-latex/blob/master/code/main.py) Main file python main.py
 - [min_dfa.py](https://github.com/shreyakupadhyay/furry-spork-latex/blob/master/code/min_dfa.py) Minimizing the DFA using an algorithm based on the technique of equivalence.
 - [reduction.py](https://github.com/shreyakupadhyay/furry-spork-latex/blob/master/code/reduction.py) Updating the given json input into the final output after minimization.
 - [generate_code.py](https://github.com/shreyakupadhyay/furry-spork-latex/blob/master/code/generate_code.py) Generating the latex code the given automaton.
 
 #### Demo
 ###### 2D Matrix
-![]()
-![]()
+![](new_PL_project/doubleSquaresMatrix.png)
+
+###### Shape generated from output Latex code 
+![](new_PL_project/twoSquares.png)
 
 
 
