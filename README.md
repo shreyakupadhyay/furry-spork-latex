@@ -39,11 +39,8 @@ Using the techniques of Machine Learning and Image Processing implementing the s
 - [generate_code.py](https://github.com/shreyakupadhyay/furry-spork-latex/blob/master/code/generate_code.py) Generating the latex code the given automaton.
 
 #### Demo
-###### 2D Matrix
-![](new_PL_project/doubleSquaresMatrix.png)
-
-###### Shape generated from output Latex code 
-![](new_PL_project/twoSquares.png)
+###### 2D Matrix                                            ###### Shape generated from output Latex code
+![](new_PL_project/doubleSquaresMatrix.png)                  ![](new_PL_project/twoSquares.png)
 
 
 
