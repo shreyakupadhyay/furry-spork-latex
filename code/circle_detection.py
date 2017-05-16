@@ -5,15 +5,16 @@ This code doesn't give good results.
 '''
 
 import cv2
-import cv2.cv as cv
+# import cv2.cv as cv
 import numpy as np
+import sys
 
-img = cv2.imread('images/wRAYW.jpg',0)
+img = cv2.imread(sys.argv[1],0)
 img = cv2.equalizeHist(img)
 cimg = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
 
-circles = cv2.HoughCircles(img,cv.CV_HOUGH_GRADIENT,1,10,param1=50,param2=30,minRadius=35,maxRadius=60)
-
+circles = cv2.HoughCircles(img,cv2.HOUGH_GRADIENT,1,10,param1=50,param2=30,minRadius=35,maxRadius=60)
+print circles
 circles = np.uint16(np.around(circles))
 for i in circles[0,:]:
     # draw the outer circle
