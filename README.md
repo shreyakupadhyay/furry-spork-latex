@@ -2,7 +2,7 @@
 
 ***
 
-<p align="center"><b> Did you had problems writting 50 lines of LATEX code for hand-written finite automaton. </b><br>Now you don't have to we are coming with the solution soon. Make sure to subscribe!</p>
+<p align="center"><b> Did you have problems writting 50 lines of LATEX code for hand-written finite automaton. </b><br>Now you don't have to, we are coming with a solution soon. Make sure to subscribe!</p>
 
 ***
 
